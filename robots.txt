@@ -1,4 +1,4 @@
-# robots.txt pour ConsultPro
+# robots.txt pour Insight Consulting & Learning
 
 # Permis à tous les robots de crawl
 User-agent: *
@@ -13,7 +13,7 @@ Allow: /
 # Disallow: /admin/
 
 # Sitemap location
-Sitemap: https://www.consultpro.com/sitemap.xml
+Sitemap: https://www.icl-sarl.com/sitemap.xml
 
 # Crawl delay (optionnel)
 # Crawl-delay: 1

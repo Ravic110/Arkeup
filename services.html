@@ -11,18 +11,16 @@
     <header>
         <nav>
             <div class="logo" style="display: flex; align-items: center; gap: 1rem;">
-                <img src="assets/images/logo.jpeg" alt="Logo" style="height: 70px; width: auto;">
+                <img src="assets/images/logo-icl-catalogue.png" alt="Logo Insight Consulting & Learning" style="height: 70px; width: auto;">
                 <div style="font-size: 1.3rem; font-weight: bold; color: white; line-height: 1.2;">Insight<br>Consulting & Learning</div>
             </div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="main-navigation">
                 <li><a href="index.html">Accueil</a></li>
-                <li><a href="about.html">À Propos</a></li>
                 <li><a href="services.html">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">À Propos</a></li>
             </ul>
-            <button class="mobile-menu-toggle">☰</button>
+            <button class="mobile-menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-navigation">☰</button>
         </nav>
     </header>
 
@@ -30,6 +28,9 @@
         <div class="hero-content">
             <h1>Catalogue de Formations 2026</h1>
             <p>Des parcours conçus pour développer les compétences clés de vos équipes.</p>
+            <div class="hero-actions">
+                <a href="assets/docs/catalogue-formations-icl-2026.pdf" class="cta-button cta-outline" download>Télécharger le Catalogue (PDF)</a>
+            </div>
         </div>
     </section>
 
@@ -80,14 +81,17 @@
                 <p class="card-text">Cursus de 3 modules, 42h au total: initiation (import et visuels), intermédiaire (modélisation/DAX), avancé (DAX complexe et dashboards).</p>
             </div>
             <div class="card">
+                <div class="card-icon"><img src="assets/images/icons/data-sql.png" alt="Icône SQL"></div>
                 <h3 class="card-title">SQL pour Analystes</h3>
                 <p class="card-text">Extraction agile de données depuis des bases relationnelles complexes. Niveau: intermédiaire.</p>
             </div>
             <div class="card">
+                <div class="card-icon"><img src="assets/images/icons/data-python.png" alt="Icône Python"></div>
                 <h3 class="card-title">Python pour la Data</h3>
                 <p class="card-text">Automatisation des analyses avec Pandas et NumPy. Niveau: avancé.</p>
             </div>
             <div class="card">
+                <div class="card-icon"><img src="assets/images/icons/data-r.png" alt="Icône R"></div>
                 <h3 class="card-title">R pour Data Analysis</h3>
                 <p class="card-text">Exploiter la puissance statistique du langage R pour les besoins analytiques. Niveau: avancé.</p>
             </div>
@@ -132,12 +136,13 @@
             </div>
 
             <div class="footer-section">
-                <h4>Ressources</h4>
+                <h4>Navigation</h4>
                 <ul>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="services.html">Services</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="about.html">À Propos</a></li>
+                    <li><a href="privacy.html">Politique Confidentialité</a></li>
                 </ul>
             </div>
 
@@ -160,6 +165,6 @@
         ↑
     </button>
 
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/script.js" defer></script>
 </body>
 </html>

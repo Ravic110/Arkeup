@@ -1,163 +1,113 @@
-// ============================================
-// MOBILE MENU TOGGLE
-// ============================================
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const navLinks = document.querySelector('.nav-links');
 
-  if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener('click', function() {
-      navLinks.classList.toggle('active');
-    });
-  }
+  if (mobileMenuToggle && navLinks) {
+    mobileMenuToggle.setAttribute('aria-expanded', 'false');
 
-  // Close mobile menu when clicking on a link
-  if (navLinks) {
+    mobileMenuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('active');
+      mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
     navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', function() {
+      link.addEventListener('click', () => {
         navLinks.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
       });
     });
   }
-});
 
-// ============================================
-// SMOOTH SCROLL FOR ANCHOR LINKS
-// ============================================
+  document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+    anchor.addEventListener('click', event => {
+      const targetId = anchor.getAttribute('href');
+      const target = targetId ? document.querySelector(targetId) : null;
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  });
-});
-
-// ============================================
-// FORM SUBMISSION
-// ============================================
-
-const contactForm = document.getElementById('contactForm');
-
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    // Get form values
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-
-    // Basic validation
-    if (!name || !email || !subject || !message) {
-      alert('Veuillez remplir tous les champs du formulaire.');
-      return;
-    }
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      alert('Veuillez entrer une adresse email valide.');
-      return;
-    }
-
-    // Here you would typically send the form data to a server
-    // For now, we'll just show a success message
-    alert('Merci pour votre message! Nous vous répondrons dès que possible.');
-    contactForm.reset();
-
-    // In a real application, you would do something like:
-    // fetch('/api/contact', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     name: name,
-    //     email: email,
-    //     subject: subject,
-    //     message: message
-    //   })
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   alert('Merci pour votre message!');
-    //   contactForm.reset();
-    // })
-    // .catch(error => console.error('Erreur:', error));
-  });
-}
-
-// ============================================
-// SCROLL TO TOP BUTTON
-// ============================================
-
-const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-
-if (scrollToTopBtn) {
-  window.addEventListener('scroll', function() {
-    if (window.pageYOffset > 300) {
-      scrollToTopBtn.style.display = 'block';
-    } else {
-      scrollToTopBtn.style.display = 'none';
-    }
-  });
-
-  scrollToTopBtn.addEventListener('click', function() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+      if (target) {
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     });
   });
-}
 
-// ============================================
-// ACTIVE NAVIGATION LINK
-// ============================================
+  const contactForm = document.getElementById('contactForm');
 
-function setActiveNavLink() {
+  if (contactForm) {
+    contactForm.addEventListener('submit', event => {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !email || !subject || !message) {
+        alert('Veuillez remplir tous les champs du formulaire.');
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Veuillez entrer une adresse email valide.');
+        return;
+      }
+
+      const recipient = contactForm.dataset.recipient || 'contact@icl-sarl.com';
+      const mailSubject = `[Site ICL] ${subject}`;
+      const mailBody = `Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+
+      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+    });
+  }
+
+  const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+  if (scrollToTopBtn) {
+    window.addEventListener('scroll', () => {
+      scrollToTopBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  const navLinks = document.querySelectorAll('.nav-links a');
-
-  navLinks.forEach(link => {
+  document.querySelectorAll('.nav-links a').forEach(link => {
     const href = link.getAttribute('href');
     if (href === currentPage || (currentPage === '' && href === 'index.html')) {
-      link.style.color = 'var(--secondary-color)';
+      link.classList.add('active');
     }
   });
-}
 
-document.addEventListener('DOMContentLoaded', setActiveNavLink);
+  const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (shouldReduceMotion || !('IntersectionObserver' in window)) {
+    return;
+  }
 
-// ============================================
-// FADE IN ANIMATION ON SCROLL
-// ============================================
-
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver(function(entries) {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-      observer.unobserve(entry.target);
-    }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
   });
-}, observerOptions);
 
-document.querySelectorAll('.card, .about-content, .section').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  observer.observe(el);
+  document.querySelectorAll('.card, .about-content, .section').forEach(element => {
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(20px)';
+    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(element);
+  });
 });

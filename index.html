@@ -11,18 +11,16 @@
     <header>
         <nav>
             <div class="logo" style="display: flex; align-items: center; gap: 1rem;">
-                <img src="assets/images/logo.jpeg" alt="Logo" style="height: 70px; width: auto;">
+                <img src="assets/images/logo-icl-catalogue.png" alt="Logo Insight Consulting & Learning" style="height: 70px; width: auto;">
                 <div style="font-size: 1.3rem; font-weight: bold; color: white; line-height: 1.2;">Insight<br>Consulting & Learning</div>
             </div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="main-navigation">
                 <li><a href="index.html">Accueil</a></li>
-                <li><a href="about.html">À Propos</a></li>
                 <li><a href="services.html">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">À Propos</a></li>
             </ul>
-            <button class="mobile-menu-toggle">☰</button>
+            <button class="mobile-menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-navigation">☰</button>
         </nav>
     </header>
 
@@ -30,7 +28,10 @@
         <div class="hero-content">
             <h1>Votre Avenir, Notre Expertise</h1>
             <p>Catalogue de Formations 2026. Insight Consulting & Learning, accélérateur de compétences à Madagascar.</p>
-            <a href="services.html" class="cta-button">Découvrir les Formations</a>
+            <div class="hero-actions">
+                <a href="services.html" class="cta-button">Découvrir les Formations</a>
+                <a href="assets/docs/catalogue-formations-icl-2026.pdf" class="cta-button cta-outline" download>Télécharger le Catalogue (PDF)</a>
+            </div>
         </div>
     </section>
 
@@ -40,22 +41,22 @@
 
         <div class="cards-grid">
             <div class="card">
-                <div class="card-icon">🔎</div>
+                <div class="card-icon"><img src="assets/images/icons/pilier-analyse.png" alt="Icône analyse des besoins"></div>
                 <h3 class="card-title">Analyse des Besoins</h3>
                 <p class="card-text">Un diagnostic précis pour proposer des solutions ciblées et adaptées à vos enjeux métier.</p>
             </div>
             <div class="card">
-                <div class="card-icon">🏆</div>
+                <div class="card-icon"><img src="assets/images/icons/pilier-excellence.png" alt="Icône excellence"></div>
                 <h3 class="card-title">Excellence</h3>
                 <p class="card-text">Des formateurs experts de terrain pour un transfert de compétences immédiatement opérationnel.</p>
             </div>
             <div class="card">
-                <div class="card-icon">💡</div>
+                <div class="card-icon"><img src="assets/images/icons/pilier-innovation.png" alt="Icône innovation"></div>
                 <h3 class="card-title">Innovation</h3>
                 <p class="card-text">Intégration des outils IA et Data les plus récents dans les parcours de formation.</p>
             </div>
             <div class="card">
-                <div class="card-icon">📈</div>
+                <div class="card-icon"><img src="assets/images/icons/pilier-impact.png" alt="Icône impact"></div>
                 <h3 class="card-title">Impact</h3>
                 <p class="card-text">Des formations orientées performance avec des résultats mesurables sur vos activités.</p>
             </div>
@@ -120,12 +121,13 @@
             </div>
 
             <div class="footer-section">
-                <h4>Ressources</h4>
+                <h4>Navigation</h4>
                 <ul>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="services.html">Services</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="about.html">À Propos</a></li>
+                    <li><a href="privacy.html">Politique Confidentialité</a></li>
                 </ul>
             </div>
 
@@ -148,6 +150,6 @@
         ↑
     </button>
 
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/script.js" defer></script>
 </body>
 </html>
