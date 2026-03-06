@@ -1,0 +1,19 @@
+# robots.txt pour ConsultPro
+
+# Permis à tous les robots de crawl
+User-agent: *
+Allow: /
+
+# Spécifique à Google
+User-agent: Googlebot
+Allow: /
+
+# Désactiver le crawl pour certains chemins (si nécessaire)
+# Disallow: /private/
+# Disallow: /admin/
+
+# Sitemap location
+Sitemap: https://www.consultpro.com/sitemap.xml
+
+# Crawl delay (optionnel)
+# Crawl-delay: 1
