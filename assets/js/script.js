@@ -36,30 +36,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactForm = document.getElementById('contactForm');
 
   if (contactForm) {
-    contactForm.addEventListener('submit', event => {
-      event.preventDefault();
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('sent') === '1') {
+      alert('Votre message a bien ete envoye. Nous vous repondrons rapidement.');
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
 
+    contactForm.addEventListener('submit', event => {
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const subject = document.getElementById('subject').value.trim();
       const message = document.getElementById('message').value.trim();
 
       if (!name || !email || !subject || !message) {
+        event.preventDefault();
         alert('Veuillez remplir tous les champs du formulaire.');
         return;
       }
 
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
+        event.preventDefault();
         alert('Veuillez entrer une adresse email valide.');
         return;
       }
-
-      const recipient = contactForm.dataset.recipient || 'contact@icl-sarl.com';
-      const mailSubject = `[Site ICL] ${subject}`;
-      const mailBody = `Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-
-      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
     });
   }
 
